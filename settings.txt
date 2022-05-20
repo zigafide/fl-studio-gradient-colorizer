@@ -1,5 +1,5 @@
 [config]
-drumkit_folder: D:\FL STUDIO!\!SAMPLES\!ZIGAFIDE STASH KIT
+drumkit_folder: <put path here>
 folders_color1: #d400ff
 folders_color2: #ff009d
 files_color1: #d400ff
