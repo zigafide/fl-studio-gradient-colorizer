@@ -43,6 +43,8 @@ def main():
 
     if config_ignore_subs == 'false':
         for subdir, dirs, files in os.walk(config_folder):
+            if subdir not in dirlist:
+                dirlist.append(subdir)
             for file in files:
                 count = dict1.get(subdir, 0)
                 count = count + 1
