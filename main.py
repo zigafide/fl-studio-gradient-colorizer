@@ -71,7 +71,9 @@ def main():
             colors = list(color1.range_to(color2, len(dirlist)))
 
             sys.stdout.write("\rcurrent file: "+foldername+"...................................")
-            f.write('Color=$' + str(colors[folderindex].hex_l)[1:] + '\n')
+            finalcolor = str(colors[folderindex].hex_l)[1:]
+            finalcolorfinal = finalcolor[4]+finalcolor[5]+finalcolor[2]+finalcolor[3]+finalcolor[0]+finalcolor[1]
+            f.write('Color=$' + finalcolorfinal + '\n')
             f.write('IconIndex=21\n')
             f.write('HeightOfs=0\n')
             f.write('SortGroup=1\n')
@@ -99,7 +101,9 @@ def main():
                             iconindex = iconfromext(extension)
 
                             sys.stdout.write("\rcurrent file: " + file+"...................................")
-                            f.write('Color=$' + str(colors[index].hex_l)[1:] + '\n')
+                            finalcolor = str(colors[index].hex_l)[1:]
+                            finalcolorfinal = finalcolor[4]+finalcolor[5]+finalcolor[2]+finalcolor[3]+finalcolor[0]+finalcolor[1]
+                            f.write('Color=$' + finalcolorfinal + '\n')
                             f.write('IconIndex=' + str(iconindex) + '\n')
                             f.write('HeightOfs=0\n')
                             f.write('SortGroup=1\n')
