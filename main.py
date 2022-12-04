@@ -57,21 +57,17 @@ def main():
             subdir = config_folder+os.sep+file
             if subdir not in dirlist:
                 dirlist.append(subdir)
-
-    folderindex = 0
-    #dirlist.append(config_folder)
-    for folder in dirlist:
-        foldername = os.path.basename(folder)
-        # print(dict1[key])
-        if os.path.isfile(folder):
-            foldername = os.path.splitext(foldername)[0]
-        with open(config_folder + os.sep + foldername + ".nfo", 'w') as f:
+                
+    #make root folder colored
+    
+    originalpath = os.getcwd()
+    os.chdir(config_folder)
+    os.chdir('../')
+    with open(os.path.basename(config_folder) + ".nfo", 'w') as f:
             color1 = Color(config_folder_color1)
-            color2 = Color(config_folder_color2)
-            colors = list(color1.range_to(color2, len(dirlist)))
 
-            sys.stdout.write("\rcurrent file: "+foldername+"...................................")
-            finalcolor = str(colors[folderindex].hex_l)[1:]
+            sys.stdout.write("\rcurrent file: "+os.path.basename(config_folder)+"...................................")
+            finalcolor = str(color1.hex_l)[1:]
             finalcolorfinal = finalcolor[4]+finalcolor[5]+finalcolor[2]+finalcolor[3]+finalcolor[0]+finalcolor[1]
             f.write('Color=$' + finalcolorfinal + '\n')
             f.write('IconIndex=21\n')
@@ -79,8 +75,43 @@ def main():
             f.write('SortGroup=1\n')
             f.write('---------\n')
             f.write("colorized by zigafide's colorizer\n")
-            f.write('follow @zigxfide on Instagram')
-        folderindex = folderindex + 1
+            f.write('follow @zigafidethegod on Instagram')
+    os.chdir(originalpath)
+
+   
+    #dirlist.append(config_folder)
+    folderindex = {}
+    foldersize = {}
+    #add all folders to dict
+    for folder in dirlist:
+    	folderindex[os.path.dirname(folder)] = 0
+    	foldersize[os.path.dirname(folder)] = 0
+    	
+    for folder in dirlist:
+        foldersize[os.path.dirname(folder)] = foldersize[os.path.dirname(folder)] + 1 
+     
+    
+    for folder in dirlist:
+        foldername = os.path.basename(folder)
+        # print(dict1[key])
+        if os.path.isfile(folder):
+            foldername = os.path.splitext(foldername)[0]
+        with open(os.path.dirname(folder) + os.sep + foldername + ".nfo", 'w') as f:
+            color1 = Color(config_folder_color1)
+            color2 = Color(config_folder_color2)
+            colors = list(color1.range_to(color2, foldersize[os.path.dirname(folder)]))
+
+            sys.stdout.write("\rcurrent file: "+foldername+"...................................")
+            finalcolor = str(colors[folderindex[os.path.dirname(folder)]].hex_l)[1:]
+            finalcolorfinal = finalcolor[4]+finalcolor[5]+finalcolor[2]+finalcolor[3]+finalcolor[0]+finalcolor[1]
+            f.write('Color=$' + finalcolorfinal + '\n')
+            f.write('IconIndex=21\n')
+            f.write('HeightOfs=0\n')
+            f.write('SortGroup=1\n')
+            f.write('---------\n')
+            f.write("colorized by zigafide's colorizer\n")
+            f.write('follow @zigafidethegod on Instagram')
+            folderindex[os.path.dirname(folder)] = folderindex[os.path.dirname(folder)] + 1
 
     for key in dict1.keys():
         for subdir, dirs, files in os.walk(key):
@@ -109,7 +140,7 @@ def main():
                             f.write('SortGroup=1\n')
                             f.write('---------\n')
                             f.write("colorized by zigafide's colorizer\n")
-                            f.write('follow @zigxfide on Instagram')
+                            f.write('follow @zigafidethegod on Instagram')
                         index = index + 1
 
 
